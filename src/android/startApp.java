@@ -346,13 +346,13 @@ public class startApp extends Assets {
                 JSONArray installedPacks = new JSONArray();
     			for (PackageInfo info : pm.getInstalledPackages(PackageManager.GET_ACTIVITIES))
     			{
-    				JSONObject info = new JSONObject() {{
-    				    put("versionName", PackInfo.versionName);
-                	    put("packageName", PackInfo.packageName);
-                		put("versionCode", PackInfo.versionCode);
-                		put("applicationInfo", PackInfo.applicationInfo);
+    				JSONObject packInfo = new JSONObject() {{
+    				    put("versionName", info.versionName);
+                	    put("packageName", info.packageName);
+                		put("versionCode", info.versionCode);
+                		put("applicationInfo", info.applicationInfo);
                 	}};
-                    installedPacks.put(info);
+                    installedPacks.put(packInfo);
                 }
     			callback.success(installedPacks);
     		}
