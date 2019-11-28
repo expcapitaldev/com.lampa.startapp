@@ -343,8 +343,17 @@ public class startApp extends Assets {
     		try {
     			PackageManager pm = cordova.getActivity().getApplicationContext().getPackageManager();
 
-    			final JSONArray installedPacks = new JSONArray(pm.getInstalledPackages(PackageManager.GET_ACTIVITIES));
-
+                JSONArray installedPacks = new JSONArray();
+    			for (PackageInfo info : pm.getInstalledPackages(PackageManager.GET_ACTIVITIES))
+    			{
+    				JSONObject info = new JSONObject() {{
+    				    put("versionName", PackInfo.versionName);
+                	    put("packageName", PackInfo.packageName);
+                		put("versionCode", PackInfo.versionCode);
+                		put("applicationInfo", PackInfo.applicationInfo);
+                	}};
+                    installedPacks.put(info);
+                }
     			callback.success(installedPacks);
     		}
     		catch (Exception e) {
