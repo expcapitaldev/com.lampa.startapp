@@ -75,6 +75,9 @@ module.exports = {
 			}
 		}
 	},
+    getInstalledPackages: function(completeCallback, errorCallback) {
+        exec(completeCallback, errorCallback, "startApp", "getInstalledPackages", []);
+    },
 	/**
 	 * extra values
 	 */

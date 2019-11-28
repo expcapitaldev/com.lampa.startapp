@@ -23,6 +23,7 @@ import android.content.pm.PackageInfo;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -56,6 +57,9 @@ public class startApp extends Assets {
 		else if(action.equals("getExtra")) {
 			this.getExtra(args, callbackContext);
 		}
+		else if(action.equals("getInstalledPackages")) {
+        	this.getInstalledPackages(callbackContext);
+        }
 
         return true;
     }
@@ -330,6 +334,24 @@ public class startApp extends Assets {
 			e.printStackTrace();
 		}
 	}
+
+	 /**
+      * getInstalledPackages
+      */
+    	private void getInstalledPackages(CallbackContext callback) {
+
+    		try {
+    			PackageManager pm = cordova.getActivity().getApplicationContext().getPackageManager();
+
+    			final List<PackageInfo> installedPacks = pm.getPackageInfo(params.getString("package"), PackageManager.GET_ACTIVITIES);
+
+    			callback.success(installedPacks);
+    		}
+    		catch (Exception e) {
+    			callback.error(e.getClass() + ": " + e.getMessage());
+    			e.printStackTrace();
+    		}
+    	}
 	
 	/**
 	 * getExtras
